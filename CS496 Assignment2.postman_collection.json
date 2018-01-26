@@ -1,0 +1,953 @@
+{
+	"id": "80463d5d-2554-f0dd-75fa-64c020d988de",
+	"name": "CS496 Assignment2",
+	"description": "",
+	"order": [
+		"feeda286-a88d-2bf6-440b-932101107b51",
+		"ec41ebc9-0b7f-232c-fd0b-8341bcf31087",
+		"4651c010-1be2-6068-edca-5dc2e4533cf7",
+		"bd8d908a-324c-2748-24ff-cabe6dee8f01",
+		"717bba48-5717-9bcc-893f-73f3001bd9ca",
+		"18c90695-5ed5-29f1-1e03-4fbf758e1607",
+		"23429331-dc40-949e-3d12-0b16e4074b1f",
+		"d4b515e1-69bc-3afd-6ea9-d51ae65a2505",
+		"665de74e-cfd7-ac43-cdcf-9e19db501947",
+		"71fe21ac-fd1d-ead1-d34c-f9dc40018d1b",
+		"9a942e6a-add1-9d30-f1aa-a227244a649d",
+		"a4b38839-d5b6-ae48-d40b-59e086b0d7f1",
+		"dc7874ce-37db-50d1-b3ab-ce64009ba5d7",
+		"6c6308fd-065f-8f58-910c-52d6ee53fcba"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 0,
+	"owner": "3573013",
+	"public": false,
+	"events": null,
+	"variables": [],
+	"auth": null,
+	"requests": [
+		{
+			"id": "18c90695-5ed5-29f1-1e03-4fbf758e1607",
+			"headers": "Authorization: {{OAuthToken}}\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "{{OAuthToken}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://api.github.com/gists/{{newGistId}}?access_token={{OAuthToken}}",
+			"queryParams": [
+				{
+					"key": "access_token",
+					"value": "{{OAuthToken}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6d0424d8-a24a-418c-8308-4a142d13ca2e",
+						"type": "text/javascript",
+						"exec": [
+							"// Get Chai Assert Function",
+							"    var assert = require('chai').assert;",
+							"    ",
+							"// Get json Data",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"pm.test(\"Confirm Description\", function () {",
+							"    assert(jsonData.description ===\"Test Adding A Gist To My Account\")",
+							"});",
+							"",
+							"pm.test(\"Confirm Public\", function () {",
+							"    assert(jsonData.public === true);",
+							"});",
+							"",
+							"pm.test(\"Confirm File Name\", function () {",
+							"    assert(jsonData.files[\"file1.txt\"].filename === \"file1.txt\")",
+							"});",
+							"",
+							"pm.test(\"Confirm File Contents\", function () {",
+							"    assert(jsonData.files[\"file1.txt\"].content ===  \"This is a Test Gist\")",
+							"});"
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"auth": null,
+			"time": 1516990111206,
+			"name": "Confirm Gist Contents",
+			"description": "Confirm Contents of the Gis are actually what was sent in prior post",
+			"collectionId": "80463d5d-2554-f0dd-75fa-64c020d988de",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "// Get Chai Assert Function\n    var assert = require('chai').assert;\n    \n// Get json Data\n    var jsonData = pm.response.json();\n    \npm.test(\"Confirm Description\", function () {\n    assert(jsonData.description ===\"Test Adding A Gist To My Account\")\n});\n\npm.test(\"Confirm Public\", function () {\n    assert(jsonData.public === true);\n});\n\npm.test(\"Confirm File Name\", function () {\n    assert(jsonData.files[\"file1.txt\"].filename === \"file1.txt\")\n});\n\npm.test(\"Confirm File Contents\", function () {\n    assert(jsonData.files[\"file1.txt\"].content ===  \"This is a Test Gist\")\n});",
+			"currentHelper": null,
+			"helperAttributes": null
+		},
+		{
+			"id": "23429331-dc40-949e-3d12-0b16e4074b1f",
+			"headers": "Authorization: {{OAuthToken}}\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "{{OAuthToken}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://api.github.com/gists/{{newGistId}}?access_token={{OAuthToken}}",
+			"queryParams": [
+				{
+					"key": "access_token",
+					"value": "{{OAuthToken}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8eaac9b2-cf52-4cb0-bc46-c52e73f42752",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Edit Gist Status Check\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"method": "PATCH",
+			"collectionId": "80463d5d-2554-f0dd-75fa-64c020d988de",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Edit Gist",
+			"description": "Edit Gist to say \"This Test GIst is Edited\"",
+			"descriptionFormat": "html",
+			"time": 1516990486139,
+			"version": 2,
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "pm.test(\"Edit Gist Status Check\", function () {\n    pm.response.to.have.status(200);\n});",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": "{\n\t\"files\":{\n\t\t\"file1.txt\": {\n\t\t\t\"content\" : \"This Test Gist is Edited\"\n\t\t}\n\t}\n}"
+		},
+		{
+			"id": "4651c010-1be2-6068-edca-5dc2e4533cf7",
+			"headers": "Authorization: {{OAuthToken}}\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "{{OAuthToken}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://api.github.com/users/SHarber/gists?access_token={{OAuthToken}}",
+			"folder": null,
+			"queryParams": [
+				{
+					"key": "access_token",
+					"value": "{{OAuthToken}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6139ac90-3778-4c61-a805-ffc2f406206c",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Get Number of MY Gists\", function () {",
+							"    ",
+							"    // Get JSON Response",
+							"     var jsonData = pm.response.json();",
+							"     ",
+							"     // Get Number of Gists",
+							"     var numGists = jsonData.length;",
+							"     ",
+							"     // Set Variable",
+							"     pm.environment.set(\"numGists\", numGists);",
+							"     ",
+							"     // Log to Console for Confirmation.",
+							"     console.log(numGists);",
+							"});",
+							"",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"auth": {
+				"type": "noauth"
+			},
+			"time": 1516978694689,
+			"name": "Get My Gists",
+			"description": "Get SHarber's Total Number of Gists",
+			"collectionId": "80463d5d-2554-f0dd-75fa-64c020d988de",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "pm.test(\"Get Number of MY Gists\", function () {\n    \n    // Get JSON Response\n     var jsonData = pm.response.json();\n     \n     // Get Number of Gists\n     var numGists = jsonData.length;\n     \n     // Set Variable\n     pm.environment.set(\"numGists\", numGists);\n     \n     // Log to Console for Confirmation.\n     console.log(numGists);\n});\n\n\n\n\n",
+			"currentHelper": null,
+			"helperAttributes": null
+		},
+		{
+			"id": "665de74e-cfd7-ac43-cdcf-9e19db501947",
+			"headers": "Authorization: {{OAuthToken}}\nContent-Type: application/json\nContent-Length: 0\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "{{OAuthToken}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Length",
+					"value": "0",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://api.github.com/gists/{{newGistId}}/star?access_token={{OAuthToken}}",
+			"queryParams": [
+				{
+					"key": "access_token",
+					"value": "{{OAuthToken}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8be9ae11-3f35-4339-8395-79a1221e4c1d",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Star Gist\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"auth": {
+				"type": "noauth"
+			},
+			"time": 1516990839112,
+			"name": "Star Gist",
+			"description": "Star newly created gist",
+			"collectionId": "80463d5d-2554-f0dd-75fa-64c020d988de",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "pm.test(\"Star Gist\", function () {\n    pm.response.to.have.status(204);\n});",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": ""
+		},
+		{
+			"id": "6c6308fd-065f-8f58-910c-52d6ee53fcba",
+			"headers": "Authorization: {{OAuthToken}}\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "{{OAuthToken}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://api.github.com/gists/{{newGistId}}?access_token={{OAuthToken}}",
+			"queryParams": [
+				{
+					"key": "access_token",
+					"value": "{{OAuthToken}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9281a8e3-29ca-45db-b50e-7a5a43448ccf",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Delete A Gist\", function () {",
+							"    pm.response.to.have.status(204); // 204 Status for Deleted",
+							"});"
+						]
+					}
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"method": "DELETE",
+			"collectionId": "80463d5d-2554-f0dd-75fa-64c020d988de",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Delete Gist",
+			"description": "Delete Created Gist",
+			"descriptionFormat": "html",
+			"time": 1516992711037,
+			"version": 2,
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "pm.test(\"Delete A Gist\", function () {\n    pm.response.to.have.status(204); // 204 Status for Deleted\n});",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": ""
+		},
+		{
+			"id": "717bba48-5717-9bcc-893f-73f3001bd9ca",
+			"headers": "Authorization: {{OAuthToken}}\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "{{OAuthToken}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://api.github.com/gists?access_token={{OAuthToken}}",
+			"queryParams": [
+				{
+					"key": "access_token",
+					"value": "{{OAuthToken}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "522bfc68-29ec-4c5d-8346-a341ec7c62c8",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Check Gists Increased By 1\", function () {",
+							"    ",
+							"    // Get Chai Assert Function",
+							"    var assert = require('chai').assert;",
+							"    ",
+							"    // Get JSON Response",
+							"     var jsonData = pm.response.json();",
+							"     ",
+							"     // Get Number of Gists",
+							"     var newNumGists = jsonData.length;",
+							"     ",
+							"     // Log to Console for Confirmation.",
+							"     console.log(newNumGists);",
+							"     ",
+							"     // Check to see that Current # of Gists is Higher than the Old # Of Gists",
+							"       assert( newNumGists > pm.environment.get(\"numGists\"));",
+							"});",
+							"",
+							"",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"auth": null,
+			"time": 1516982423417,
+			"name": "Check Gists Increased By 1",
+			"description": "Check SHarber's Gists and make sure # of Gists Increased By 1 by comparint the environment Variable Previously Assigned",
+			"collectionId": "80463d5d-2554-f0dd-75fa-64c020d988de",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "pm.test(\"Check Gists Increased By 1\", function () {\n    \n    // Get Chai Assert Function\n    var assert = require('chai').assert;\n    \n    // Get JSON Response\n     var jsonData = pm.response.json();\n     \n     // Get Number of Gists\n     var newNumGists = jsonData.length;\n     \n     // Log to Console for Confirmation.\n     console.log(newNumGists);\n     \n     // Check to see that Current # of Gists is Higher than the Old # Of Gists\n       assert( newNumGists > pm.environment.get(\"numGists\"));\n});\n\n\n\n\n\n",
+			"currentHelper": null,
+			"helperAttributes": null
+		},
+		{
+			"id": "71fe21ac-fd1d-ead1-d34c-f9dc40018d1b",
+			"headers": "Authorization: {{OAuthToken}}\nContent-Type: application/json\nContent-Length: 0\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "{{OAuthToken}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Length",
+					"value": "0",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://api.github.com/gists/{{newGistId}}/star?access_token={{OAuthToken}}",
+			"queryParams": [
+				{
+					"key": "access_token",
+					"value": "{{OAuthToken}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a2887428-4bba-4ab8-bcf1-f7850dbb2d64",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Star Gist\", function () {",
+							"    pm.response.to.have.status(204);    // 204 Status if Gist is starred ",
+							"});"
+						]
+					}
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"method": "GET",
+			"collectionId": "80463d5d-2554-f0dd-75fa-64c020d988de",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Check Gist For Star",
+			"description": "Check if Gist is Starred",
+			"descriptionFormat": "html",
+			"time": 1516990917800,
+			"version": 2,
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "pm.test(\"Star Gist\", function () {\n    pm.response.to.have.status(204);    // 204 Status if Gist is starred \n});",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": ""
+		},
+		{
+			"id": "9a942e6a-add1-9d30-f1aa-a227244a649d",
+			"headers": "Authorization: {{OAuthToken}}\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "{{OAuthToken}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://api.github.com/gists/starred?access_token={{OAuthToken}}",
+			"queryParams": [
+				{
+					"key": "access_token",
+					"value": "{{OAuthToken}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6fd6f277-e138-4507-9e04-463432cf7d69",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Starred Gists\", function () {",
+							"    // Get Chai Assert Function",
+							"    var assert = require('chai').assert;",
+							"    ",
+							"    // Get json Data",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    // Check Number of Gists Starred is Now 1.",
+							"    assert(jsonData.length === 1)",
+							"    ",
+							"});"
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"auth": {
+				"type": "noauth"
+			},
+			"time": 1516992164029,
+			"name": "Check Starred Gists",
+			"description": "Confirm only 1 starred Gist & Gist is correct",
+			"collectionId": "80463d5d-2554-f0dd-75fa-64c020d988de",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "pm.test(\"Starred Gists\", function () {\n    // Get Chai Assert Function\n    var assert = require('chai').assert;\n    \n    // Get json Data\n    var jsonData = pm.response.json();\n    \n    // Check Number of Gists Starred is Now 1.\n    assert(jsonData.length === 1)\n    \n});",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": ""
+		},
+		{
+			"id": "a4b38839-d5b6-ae48-d40b-59e086b0d7f1",
+			"headers": "Authorization: {{OAuthToken}}\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "{{OAuthToken}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://api.github.com/gists/{{newGistId}}/star?access_token={{OAuthToken}}",
+			"queryParams": [
+				{
+					"key": "access_token",
+					"value": "{{OAuthToken}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cd22c09e-b544-45f9-a370-cded5ec58ad5",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Gist Unstarred\", function () {",
+							"    pm.response.to.have.status(204); // Status code 204 if unstarred",
+							"});"
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "raw",
+			"auth": {
+				"type": "noauth"
+			},
+			"time": 1516992336612,
+			"name": "Unstar Gist",
+			"description": "Unstar a starred gist",
+			"collectionId": "80463d5d-2554-f0dd-75fa-64c020d988de",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "pm.test(\"Gist Unstarred\", function () {\n    pm.response.to.have.status(204); // Status code 204 if unstarred\n});",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": ""
+		},
+		{
+			"id": "bd8d908a-324c-2748-24ff-cabe6dee8f01",
+			"headers": "Authorization: {{OAuthToken}}\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "{{OAuthToken}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://api.github.com/gists?access_token={{OAuthToken}}",
+			"folder": null,
+			"queryParams": [
+				{
+					"key": "access_token",
+					"value": "{{OAuthToken}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d05c5598-d8d7-4783-a577-4a04964cc95b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Create A Gist\", function () {",
+							"    // Check for Created Status",
+							"    pm.response.to.have.status(201);",
+							"    ",
+							"    // Store New Gist Id",
+							"   ",
+							"});",
+							"",
+							"    // Get Json Response",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    // Store New Gist's ID",
+							"    var id = jsonData.id;",
+							"    ",
+							"    // Set Environment Variable",
+							"    pm.environment.set(\"newGistId\", id);",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"auth": {
+				"type": "noauth"
+			},
+			"time": 1516989828167,
+			"name": "Create A New Gist",
+			"description": "Create A New Gist for User SHarber",
+			"collectionId": "80463d5d-2554-f0dd-75fa-64c020d988de",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "pm.test(\"Create A Gist\", function () {\n    // Check for Created Status\n    pm.response.to.have.status(201);\n    \n    // Store New Gist Id\n   \n});\n\n    // Get Json Response\n    var jsonData = pm.response.json();\n    \n    // Store New Gist's ID\n    var id = jsonData.id;\n    \n    // Set Environment Variable\n    pm.environment.set(\"newGistId\", id);\n\n\n",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": "{\r\n  \"description\": \"Test Adding A Gist To My Account\",\r\n  \"public\": true,\r\n  \"files\": {\r\n    \"file1.txt\": {\r\n      \"content\": \"This is a Test Gist\"\r\n    }\r\n  }\r\n}"
+		},
+		{
+			"id": "d4b515e1-69bc-3afd-6ea9-d51ae65a2505",
+			"headers": "Authorization: {{OAuthToken}}\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "{{OAuthToken}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://api.github.com/gists/{{newGistId}}?access_token={{OAuthToken}}",
+			"queryParams": [
+				{
+					"key": "access_token",
+					"value": "{{OAuthToken}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "90a3c0b2-3a5a-42b4-b478-e81b843e3cc9",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Edit Gist Status Check\", function () {",
+							"    // Get Chai Assert Function",
+							"        var assert = require('chai').assert;",
+							"    ",
+							"    // Get json Data",
+							"        var jsonData = pm.response.json();",
+							"    ",
+							"    // Assert if Contents are Updated",
+							"        assert(jsonData.files[\"file1.txt\"].content ===  \"This Test Gist is Edited\")",
+							"});"
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"auth": {
+				"type": "noauth"
+			},
+			"time": 1516990665496,
+			"name": "Confirm Edit",
+			"description": "Confirm Gist Now Contains Edited Content",
+			"collectionId": "80463d5d-2554-f0dd-75fa-64c020d988de",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "pm.test(\"Edit Gist Status Check\", function () {\n    // Get Chai Assert Function\n        var assert = require('chai').assert;\n    \n    // Get json Data\n        var jsonData = pm.response.json();\n    \n    // Assert if Contents are Updated\n        assert(jsonData.files[\"file1.txt\"].content ===  \"This Test Gist is Edited\")\n});",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": "{\n\t\"files\":{\n\t\t\"file1.txt\": {\n\t\t\t\"content\" : \"This Test Gist is Edited\"\n\t\t}\n\t}\n}"
+		},
+		{
+			"id": "dc7874ce-37db-50d1-b3ab-ce64009ba5d7",
+			"headers": "Authorization: {{OAuthToken}}\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "{{OAuthToken}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://api.github.com/gists/starred?access_token={{OAuthToken}}",
+			"queryParams": [
+				{
+					"key": "access_token",
+					"value": "{{OAuthToken}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ac10752-d572-4343-92e7-1d8610e2de9b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Starred Gists\", function () {",
+							"    // Get Chai Assert Function",
+							"    var assert = require('chai').assert;",
+							"    ",
+							"    // Get json Data",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    // Check Number of Gists Starred is Now 1.",
+							"    assert(jsonData.length === 0)",
+							"    ",
+							"});"
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"auth": {
+				"type": "noauth"
+			},
+			"time": 1516992634416,
+			"name": "Check Starred Gist is Removed",
+			"description": "Confirm no Starred Gists",
+			"collectionId": "80463d5d-2554-f0dd-75fa-64c020d988de",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "pm.test(\"Starred Gists\", function () {\n    // Get Chai Assert Function\n    var assert = require('chai').assert;\n    \n    // Get json Data\n    var jsonData = pm.response.json();\n    \n    // Check Number of Gists Starred is Now 1.\n    assert(jsonData.length === 0)\n    \n});",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": ""
+		},
+		{
+			"folder": null,
+			"id": "ec41ebc9-0b7f-232c-fd0b-8341bcf31087",
+			"name": "WolfordJ Public Gists",
+			"dataMode": "params",
+			"data": null,
+			"auth": {
+				"type": "noauth"
+			},
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d8e37752-a69b-419c-815e-fa71a81c2177",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Confirm user wolfordj has 1 public gist\", function () {",
+							"     var jsonData = pm.response.json();",
+							"    jsonData.length >= 1;",
+							"});",
+							"",
+							""
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e5d04aaa-8099-4d28-8141-f4c799163306",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"rawModeData": null,
+			"descriptionFormat": "html",
+			"description": "Confirm user 'wolfordj' has atleast 1 public Gist.",
+			"variables": null,
+			"headers": "Authorization: {{OAuthToken}}\n",
+			"method": "GET",
+			"pathVariables": {},
+			"url": "https://api.github.com/users/wolfordj/gists",
+			"queryParams": [],
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "{{OAuthToken}}",
+					"enabled": true
+				}
+			],
+			"pathVariableData": [],
+			"responses": [],
+			"collectionId": "80463d5d-2554-f0dd-75fa-64c020d988de",
+			"preRequestScript": null,
+			"tests": "pm.test(\"Confirm user wolfordj has 1 public gist\", function () {\n     var jsonData = pm.response.json();\n    jsonData.length >= 1;\n});\n\n",
+			"currentHelper": null,
+			"helperAttributes": null
+		},
+		{
+			"folder": null,
+			"id": "feeda286-a88d-2bf6-440b-932101107b51",
+			"name": "Get Public Gists",
+			"dataMode": "params",
+			"data": null,
+			"auth": {
+				"type": "noauth"
+			},
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cffbe674-4417-4819-b698-8bb37c2f2041",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Confirm 30 Public Gists\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    jsonData.length >= 30;",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e5d04aaa-8099-4d28-8141-f4c799163306",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"rawModeData": null,
+			"descriptionFormat": "html",
+			"description": "Confirm return of 30 Public Gists",
+			"variables": null,
+			"headers": "Authorization: {{OAuthToken}}\n",
+			"method": "GET",
+			"pathVariables": {},
+			"url": "https://api.github.com/gists/public",
+			"queryParams": [],
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "{{OAuthToken}}",
+					"enabled": true
+				}
+			],
+			"pathVariableData": [],
+			"responses": [],
+			"collectionId": "80463d5d-2554-f0dd-75fa-64c020d988de",
+			"preRequestScript": null,
+			"tests": "pm.test(\"Confirm 30 Public Gists\", function () {\n    var jsonData = pm.response.json();\n    jsonData.length >= 30;\n});",
+			"currentHelper": null,
+			"helperAttributes": null
+		}
+	]
+}
